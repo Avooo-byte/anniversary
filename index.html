@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Four Years of Us • 06.07.2022</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #1a1110;
+            --bg-card: #1f1615;
+            --burgundy: #6b1d2a;
+            --burgundy-light: #8b2a3a;
+            --red-deep: #9b1b30;
+            --gold: #b8944b;
+            --gold-dim: #8a6d3b;
+            --cream: #e8ddd0;
+            --cream-dim: #c4b8a8;
+            --text-light: #ddd5cc;
+            --text-dim: #a89888;
+            --shadow-dark: 0 30px 80px rgba(0, 0, 0, 0.5);
+            --border-subtle: rgba(184, 148, 75, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            background: var(--bg-deep);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Deep ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse at 30% 30%, rgba(155, 27, 48, 0.06) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 70%, rgba(184, 148, 75, 0.04) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(107, 29, 42, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: deepGlow 20s ease-in-out infinite;
+        }
+
+        @keyframes deepGlow {
+            0%, 100% { opacity: 0.7; }
+            33% { opacity: 1; }
+            66% { opacity: 0.5; }
+        }
+
+        /* Falling rose petals - darker, more subdued */
+        .petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 1.1rem;
+            animation: fall linear infinite;
+            opacity: 0;
+            filter: grayscale(0.3) brightness(0.7);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-5vh) rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+            8% {
+                opacity: 0.35;
+            }
+            85% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(110vh) rotate(540deg) translateX(80px);
+                opacity: 0;
+            }
+        }
+
+        .petal:nth-child(1) { left: 3%; animation-duration: 18s; animation-delay: 0s; }
+        .petal:nth-child(2) { left: 12%; animation-duration: 20s; animation-delay: 2s; }
+        .petal:nth-child(3) { left: 22%; animation-duration: 16s; animation-delay: 5s; }
+        .petal:nth-child(4) { left: 31%; animation-duration: 22s; animation-delay: 1s; }
+        .petal:nth-child(5) { left: 40%; animation-duration: 19s; animation-delay: 3s; }
+        .petal:nth-child(6) { left: 50%; animation-duration: 17s; animation-delay: 6s; }
+        .petal:nth-child(7) { left: 58%; animation-duration: 21s; animation-delay: 4s; }
+        .petal:nth-child(8) { left: 67%; animation-duration: 15s; animation-delay: 7s; }
+        .petal:nth-child(9) { left: 76%; animation-duration: 23s; animation-delay: 2.5s; }
+        .petal:nth-child(10) { left: 85%; animation-duration: 18s; animation-delay: 5.5s; }
+        .petal:nth-child(11) { left: 92%; animation-duration: 20s; animation-delay: 1.5s; }
+        .petal:nth-child(12) { left: 48%; animation-duration: 24s; animation-delay: 8s; }
+
+        /* Main card wrapper */
+        .main-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 600px;
+            display: none;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 55px 48px;
+            box-shadow: var(--shadow-dark), 0 0 0 1px rgba(184, 148, 75, 0.1) inset;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* Subtle inner glow at top */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(184, 148, 75, 0.5), transparent);
+        }
+
+        /* Candle-like warm dot */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(184, 148, 75, 0.6), 0 0 30px rgba(184, 148, 75, 0.3);
+            animation: candleFlicker 3s ease-in-out infinite;
+        }
+
+        @keyframes candleFlicker {
+            0%, 100% { opacity: 0.6; box-shadow: 0 0 10px rgba(184, 148, 75, 0.4); }
+            50% { opacity: 1; box-shadow: 0 0 18px rgba(184, 148, 75, 0.7), 0 0 35px rgba(184, 148, 75, 0.35); }
+        }
+
+        /* Date badge */
+        .date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 38px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            font-weight: 300;
+        }
+
+        .date-badge .line {
+            width: 24px;
+            height: 1px;
+            background: var(--gold-dim);
+            opacity: 0.4;
+        }
+
+        /* Heading */
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--text-light);
+            line-height: 1.15;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 .accent {
+            font-family: 'Great Vibes', cursive;
+            color: var(--burgundy-light);
+            font-size: 3.8rem;
+            display: block;
+            line-height: 1;
+            margin-bottom: -4px;
+            text-shadow: 0 0 40px rgba(139, 42, 58, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 42px;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Wedding remembrance */
+        .wedding-remembrance {
+            background: rgba(107, 29, 42, 0.12);
+            border-radius: 18px;
+            padding: 28px 30px;
+            margin-bottom: 38px;
+            border-left: 2px solid var(--burgundy);
+            position: relative;
+        }
+
+        .wedding-remembrance p {
+            font-size: 1rem;
+            color: var(--cream-dim);
+            line-height: 1.9;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .wedding-remembrance .highlight {
+            color: var(--burgundy-light);
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        /* Love note */
+        .love-note {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 18px;
+            padding: 32px 30px;
+            margin-bottom: 32px;
+            border: 1px solid rgba(184, 148, 75, 0.1);
+            position: relative;
+        }
+
+        .love-note::before {
+            content: '"';
+            position: absolute;
+            top: 6px;
+            left: 18px;
+            font-size: 4.5rem;
+            color: rgba(107, 29, 42, 0.3);
+            font-family: 'Georgia', serif;
+            line-height: 1;
+        }
+
+        .love-note p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 2;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        /* Signature */
+        .signature-line {
+            text-align: right;
+            margin-top: 18px;
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--burgundy-light);
+            line-height: 1;
+        }
+
+        .signature-sub {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            margin-top: 2px;
+        }
+
+        /* Music indicator */
+        .music-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 28px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            font-weight: 200;
+        }
+
+        .music-note .note-icon {
+            display: inline-block;
+            animation: gentleBounce 2s ease-in-out infinite;
+            font-size: 0.85rem;
+        }
+
+        .music-note .note-icon:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* Divider */
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold-dim);
+            opacity: 0.3;
+            margin: 0 auto 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .card {
+                padding: 40px 28px;
+                border-radius: 20px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            h1 .accent {
+                font-size: 2.8rem;
+            }
+            .wedding-remembrance {
+                padding: 22px 18px;
+            }
+            .love-note {
+                padding: 24px 20px;
+            }
+            .love-note p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Falling petals -->
+    <div class="petals-container">
+        <span class="petal">🥀</span>
+        <span class="petal">🌹</span>
+        <span class="petal">🕯️</span>
+        <span class="petal">🥀</span>
+        <span class="petal">🌹</span>
+        <span class="petal">🥀</span>
+        <span class="petal">🌹</span>
+        <span class="petal">🕯️</span>
+        <span class="petal">🥀</span>
+        <span class="petal">🌹</span>
+        <span class="petal">🥀</span>
+        <span class="petal">🌹</span>
+    </div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="Grover_Washington_Jr._ft._Bill_Withers_-_Just_the_two_of_us_(mp3.pm).mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="main-wrapper" id="mainContent">
+        <div class="card">
+            <div class="date-badge">
+                <span class="line"></span>
+                06 . 07 . 2022
+                <span class="line"></span>
+            </div>
+
+            <h1>
+                Four Years
+                <span class="accent">with you</span>
+            </h1>
+            <p class="subtitle">A love that deepens with every season</p>
+
+            <div class="divider"></div>
+
+            <div class="wedding-remembrance">
+                <p>
+                    A <span class="highlight">summer day</span> I'll never forget. You in <span class="highlight">crimson red</span>, radiant against the golden light. Me in <span class="highlight">white</span>, heart pounding, hands trembling — not from nerves, but from the weight of how much I loved you. The sun bore witness that afternoon, and every July since, it reminds me of the moment you became my forever.
+                </p>
+            </div>
+
+            <div class="love-note">
+                <p>
+                   Four years. 1,461 days. 35,064 hours and a lifetime to come. You've been the most beautiful part of my life, someone who makes me want to do much better than I was yesterday. We've always been loyal to each other and we might take it for granted at times but there's nothing more precious. Choosing each other, every day, everytime and making them a part of your life in such a way that we plan our future aligned. Sweetheart, I always only want to be with you, your smile fills up my world like nothing else.  I’ve seen you change beautifully overtime, into this woman I fall for head over heels. You may change in all different ways ishu, but my love for you is a raging fire that knows no limit. I love your contagious smile, and I will keep it alive forever. InshAllah.
+                    <br><br>
+                    I don't need the sun when I have you beside me. My sunshine, my only sunshine.
+                </p>
+            </div>
+
+            <div class="signature-line">
+                <div class="signature">Yours, always</div>
+                <div class="signature-sub">Your Husband</div>
+            </div>
+
+            <div class="music-note">
+                <span class="note-icon">♪</span>
+                <span class="note-icon">♫</span>
+                Just the Two of Us — Playing softly
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Protection -->
+    <script>
+        (function() {
+            const correctPassword = '060722';
+            const mainContent = document.getElementById('mainContent');
+
+            // Check session
+            if (sessionStorage.getItem('anniversary_auth_060722') === 'true') {
+                revealContent();
+                return;
+            }
+
+            let attempts = 0;
+            const maxAttempts = 5;
+
+            function createOverlay(message, showInput) {
+                const overlay = document.createElement('div');
+                overlay.id = 'pw-overlay';
+                overlay.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: #1a1110; z-index: 9999; display: flex;
+                    justify-content: center; align-items: center;
+                    font-family: 'Cormorant Garamond', 'Georgia', serif;
+                    padding: 20px;
+                `;
+
+                const inner = document.createElement('div');
+                inner.style.cssText = `
+                    text-align: center; max-width: 400px;
+                `;
+
+                const candle = document.createElement('div');
+                candle.innerHTML = '🕯️';
+                candle.style.cssText = 'font-size: 2.5rem; margin-bottom: 24px; animation: candleFlicker 3s ease-in-out infinite;';
+
+                const title = document.createElement('h2');
+                title.textContent = 'A Private Evening';
+                title.style.cssText = 'color: #ddd5cc; font-weight: 300; font-size: 1.8rem; margin-bottom: 10px; letter-spacing: 1px;';
+
+                const msg = document.createElement('p');
+                msg.textContent = message;
+                msg.style.cssText = 'color: #a89888; font-size: 1rem; font-style: italic; margin-bottom: 28px; line-height: 1.6;';
+
+                inner.appendChild(candle);
+                inner.appendChild(title);
+                inner.appendChild(msg);
+
+                if (showInput) {
+                    const input = document.createElement('input');
+                    input.type = 'password';
+                    input.placeholder = 'Enter password...';
+                    input.style.cssText = `
+                        background: transparent; border: none; border-bottom: 1px solid #8a6d3b;
+                        color: #ddd5cc; font-family: 'Cormorant Garamond', serif;
+                        font-size: 1.1rem; padding: 10px 6px; width: 220px; text-align: center;
+                        outline: none; letter-spacing: 2px;
+                    `;
+                    input.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter') {
+                            checkPassword(input.value);
+                        }
+                    });
+
+                    const btn = document.createElement('button');
+                    btn.textContent = 'Enter';
+                    btn.style.cssText = `
+                        display: block; margin: 18px auto 0;
+                        background: transparent; border: 1px solid #8a6d3b; color: #b8944b;
+                        padding: 10px 36px; font-family: 'Montserrat', sans-serif;
+                        font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+                        cursor: pointer; transition: all 0.3s ease;
+                    `;
+                    btn.addEventListener('mouseenter', () => {
+                        btn.style.background = 'rgba(184,148,75,0.1)';
+                        btn.style.borderColor = '#b8944b';
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.background = 'transparent';
+                        btn.style.borderColor = '#8a6d3b';
+                    });
+                    btn.addEventListener('click', () => checkPassword(input.value));
+
+                    inner.appendChild(input);
+                    inner.appendChild(btn);
+                }
+
+                overlay.appendChild(inner);
+                document.body.appendChild(overlay);
+                return overlay;
+            }
+
+            function checkPassword(input) {
+                if (input === correctPassword) {
+                    sessionStorage.setItem('anniversary_auth_060722', 'true');
+                    const overlay = document.getElementById('pw-overlay');
+                    if (overlay) {
+                        overlay.style.opacity = '0';
+                        overlay.style.transition = 'opacity 0.6s ease';
+                        setTimeout(() => overlay.remove(), 600);
+                    }
+                    revealContent();
+                } else if (input === null || input === '') {
+                    // do nothing
+                } else {
+                    attempts++;
+                    const remaining = maxAttempts - attempts;
+                    if (remaining <= 0) {
+                        const overlay = document.getElementById('pw-overlay');
+                        if (overlay) overlay.remove();
+                        createOverlay('This evening is not for you. Please close this page.', false);
+                    } else {
+                        const overlay = document.getElementById('pw-overlay');
+                        if (overlay) overlay.remove();
+                        createOverlay('Not quite right. ' + remaining + ' attempt' + (remaining > 1 ? 's' : '') + ' remaining.', true);
+                        const newInput = document.querySelector('#pw-overlay input');
+                        if (newInput) newInput.focus();
+                    }
+                }
+            }
+
+            function revealContent() {
+                mainContent.style.display = 'block';
+                // Attempt autoplay on first interaction
+                document.body.addEventListener('click', function playOnce() {
+                    const audio = document.getElementById('bgMusic');
+                    if (audio) {
+                        audio.volume = 0.25;
+                        audio.play().catch(() => {});
+                    }
+                    document.body.removeEventListener('click', playOnce);
+                }, { once: true });
+            }
+
+            // Show password gate
+            setTimeout(() => {
+                createOverlay('Enter the date we began our forever.', true);
+                const input = document.querySelector('#pw-overlay input');
+                if (input) input.focus();
+            }, 400);
+        })();
+    </script>
+
+</body>
+</html>
